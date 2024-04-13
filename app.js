@@ -11,7 +11,8 @@ const app = express();
 
 
 //models
-const Usuario = require('./models/usuario')
+const Usuario = require('./models/usuario');
+const Funcionarios = require('./models/funcionarios');
 
 //ImportDeRotas
 const usuarioRouter = require("./routes/usuarioRoutes");
