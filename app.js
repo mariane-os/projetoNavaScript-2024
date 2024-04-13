@@ -3,15 +3,20 @@ const express = require('express');
 const path = require('path');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 const connection = require('./database/database');
 
-const Usuario = require('./models/usuario');
+
+const app = express();
 
 
-var app = express();
+//models
+const Usuario = require('./models/usuario')
+
+//ImportDeRotas
+const usuarioRouter = require("./routes/usuarioRoutes");
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//rotas
+app.use('/usuarios', usuarioRouter);
+
+
 
 //banco de dados
 connection
@@ -34,5 +41,10 @@ connection
   .catch(erro => {
     console.log(erro);
   })
+
+app.use('/', (req, res, next) => {
+  res.render('index');
+});
+  
 
 module.exports = app;
