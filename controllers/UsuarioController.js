@@ -88,7 +88,7 @@ exports.delete = (req, res, next) => {
 }
 
 exports.renderLogin = (req, res, next) => {
-    res.render('login', {msg: ''});
+    res.render('./usuario/login', {msg: ''});
 }
 
 exports.login = (req, res, next) => {
