@@ -14,7 +14,7 @@ exports.getAll = (req, res, next) => {
 }
 
 exports.renderNovo = (req, res, next) => {
-    res.render("usuario/novo");
+    res.render("./usuario/cadastrar");
 }
 
 exports.create = (req, res, next) => {
@@ -40,12 +40,12 @@ exports.create = (req, res, next) => {
                 senha: senhaCriptografada,
                 saldo: 0.00
             }).then(() => {
-                res.redirect("/usuarios");
+                res.redirect("./usuarios/login");
             });
         }
         else
         {
-            res.redirect("/usuarios");
+            res.redirect("./usuarios/cadastrar");
         }
     });
 }
