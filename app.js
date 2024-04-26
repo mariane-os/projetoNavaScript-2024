@@ -16,6 +16,7 @@ const Funcionarios = require('./models/funcionarios');
 
 //ImportDeRotas
 const usuarioRouter = require("./routes/usuarioRoutes");
+const funcionarioRouter = require("./routes/funcionarioRoutes");
 
 
 
@@ -30,8 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //rotas
 app.use('/usuarios', usuarioRouter);
-
-
+app.use('/funcionarios', funcionarioRouter);
 
 //banco de dados
 connection
