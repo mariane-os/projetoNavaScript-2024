@@ -8,11 +8,11 @@ exports.renderDashboard = (req, res, next) => {
 }
 
 exports.renderLogin = (req, res, next) => {
-    res.render("./funcionarios/login", {msg: ''});
+    res.render("./funcionario/login", {msg: ''});
 }
 
 exports.renderNovo = (req, res, next) => {
-    res.render("./funcionarios/novo");
+    res.render("./funcionario/novo");
 }
 
 exports.login = (req, res, next) => {
@@ -33,16 +33,16 @@ exports.login = (req, res, next) => {
                     numeroPessoal: funcionario.numeroPessoal
                 }
 
-                res.redirect("./funcionarios/dashboard");
+                res.redirect("./funcionario/dashboard");
             }
             else
             {
-                res.render("./funcionarios/login", {msg: "Numero ou Senha Invalidos"});
+                res.render("./funcionario/login", {msg: "Numero ou Senha Invalidos"});
             }
         }
         else
         {
-            res.render("./funcionarios/login", {msg: "Numero ou Senha Invalidos"});
+            res.render("./funcionario/login", {msg: "Numero ou Senha Invalidos"});
         }
     })
 }
@@ -70,13 +70,13 @@ exports.novo = (req, res, next) => {
                     nome: nome,
                     senha: senhaCriptografada
                 }).then(() => {
-                    res.redirect('./funcionarios/NovoNumero', {np: numeroPessoal});
+                    res.redirect('./funcionario/NovoNumero', {np: numeroPessoal});
                 });
             });
         }
         else
         {
-            res.redirect('./funcionarios/dashboard');
+            res.redirect('./funcionario/dashboard');
         }
     });
 }
