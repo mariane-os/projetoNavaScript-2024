@@ -5,7 +5,7 @@ const { op, where } = require("sequelize");
 
 
 exports.renderNovo = (req, res, next) => {
-    res.render("usuario/novo");
+    res.render("./usuario/cadastrar");
 }
 
 exports.create = (req, res, next) => {
@@ -31,12 +31,12 @@ exports.create = (req, res, next) => {
                 senha: senhaCriptografada,
                 saldo: 0.00
             }).then(() => {
-                res.redirect("/usuarios");
+                res.redirect("./usuarios/login");
             });
         }
         else
         {
-            res.redirect("/usuarios");
+            res.redirect("./usuarios/cadastrar");
         }
     });
 }
@@ -79,7 +79,7 @@ exports.delete = (req, res, next) => {
 }
 
 exports.renderLogin = (req, res, next) => {
-    res.render('login', {msg: ''});
+    res.render('./usuario/login', {msg: ''});
 }
 
 exports.login = (req, res, next) => {
