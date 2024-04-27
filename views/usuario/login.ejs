@@ -1,11 +1,13 @@
 <%- include('../partials/head.ejs') %>
+<nav class="navbar" style="background-color:#29853a; padding: 28px 0" ></nav>
+<br>
 <div class="container">
+    <br\>
     <div 
         class="card position-absolute top-50 start-50 translate-middle"
         style="width: 18rem;">
-        <div class="card-header" style="background-color: rgba(125, 88, 40, 0.813)">Login</div>
-        <!-- <div class="card-header bg-primary text-white font-weight-bold">Login</div> -->
-        <div class="card-body" style="background-color: rgba(229, 172, 119, 0.584)">
+        <div class="card-header" style="background-color: rgba(86, 165, 79, 0.813); color:rgb(255, 255, 255);">Login</div>
+        <div class="card-body" style="background-color: rgba(155, 196, 151, 0.813)">
             <form method="post" action="/usuarios/login">
                 <div class="form-floating mb-3">
                     <input
@@ -14,7 +16,7 @@
                         id="email"
                         class="form-control"
                         placeholder="Digite o seu e-mail">
-                    <label for="email">Digite o seu e-mail</label>
+                    <label for="email">Digite seu e-mail</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input
@@ -23,7 +25,7 @@
                         id="senha"
                         class="form-control"
                         placeholder="Digite a sua senha">
-                    <label for="email">Digite a sua senha</label>
+                    <label for="email">Digite sua senha</label>
                 </div>
                 <br>
                 <% if(msg != '') { %>
@@ -31,9 +33,17 @@
                         <%= msg %>
                     </div>
                 <% }%>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btn btn-primary">Login</button>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col"> 
+                        <button type="submit" class="btn btn-primary">Login</button>    
+                    </div>
+                
+                    <div class="col" > 
+                        <a href="/" class="btn btn-secondary">Cancelar</a>
+                    </div>
                 </div>
+            </div> 
             </form>
         </div>
     </div>

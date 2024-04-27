@@ -45,7 +45,7 @@ exports.create = (req, res, next) => {
         }
         else
         {
-            res.redirect("./usuarios/cadastrar");
+            res.redirect("./usuarios/login");
         }
     });
 }
