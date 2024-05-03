@@ -1,5 +1,17 @@
 <%- include('../partials/head.ejs') %>
-<nav class="navbar" style="background-color:#29853a; padding: 28px 0" ></nav>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#29853a">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="/usuarios/cadastrar" class="nav-link">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+            <a href="/usuarios/login" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item position-absolute end-0">
+            <a href="/usuarios/login" class="nav-link">Funcionarios</a>
+        </li>
+    </ul>
+</nav>
 <br>
 <div class="container">
     <br\>
@@ -15,8 +27,8 @@
                         name="email"
                         id="email"
                         class="form-control"
-                        placeholder="Digite o seu e-mail">
-                    <label for="email">Digite seu e-mail</label>
+                        placeholder="Digite seu e-mail">
+                    <label for="nome">Digite seu e-mail</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input
@@ -24,8 +36,8 @@
                         name="senha"
                         id="senha"
                         class="form-control"
-                        placeholder="Digite a sua senha">
-                    <label for="email">Digite sua senha</label>
+                        placeholder="Digite sua senha">
+                    <label for="nome">Digite sua senha</label>
                 </div>
                 <br>
                 <% if(msg != '') { %>
