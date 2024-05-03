@@ -3,15 +3,6 @@ const Usuario = require("../models/usuario");
 const bycrypt = require("bcryptjs");
 const { op, where } = require("sequelize");
 
-exports.getAll = (req, res, next) => {
-    Usuario.findAll({
-        order: [
-            ['nome', 'ASC']
-        ]
-    }).then(usuarios => {
-        res.render("usuario/index", {usuarios: usuarios});
-    })
-}
 
 exports.renderNovo = (req, res, next) => {
     res.render("./usuario/cadastrar");
