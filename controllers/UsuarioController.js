@@ -1,7 +1,7 @@
 const Express = require("express");
 const Usuario = require("../models/usuario");
 const bycrypt = require("bcryptjs");
-const { op, where } = require("sequelize");
+const { Op, where } = require("sequelize");
 
 
 exports.renderNovo = (req, res, next) => {
@@ -13,17 +13,18 @@ exports.create = (req, res, next) => {
     const nome = req.body.nome;
     const email = req.body.email;
     const senha = req.body.senha;
-
+    console.log("Entrou no create");
     Usuario.findOne({
         where: {
-            [op.or]: [{email: email}, {cpf: cpf}]
+            [Op.or]: [{email: email}, {cpf: cpf}],
         }
     }).then(usuario => {
+        console.log("Entrou na arrow")
         if(usuario == undefined)
         {
             const salt = bycrypt.genSaltSync();
             const senhaCriptografada = bycrypt.hashSync(senha, salt);
-
+            console.log("Entrou no undefined")
             Usuario.create({
                 cpf: cpf,
                 nome: nome,
@@ -31,12 +32,14 @@ exports.create = (req, res, next) => {
                 senha: senhaCriptografada,
                 saldo: 0.00
             }).then(() => {
-                res.redirect("./usuarios/login");
+                console.log("Foi criado");
+                res.redirect("login");
             });
+            res.redirect("login");
         }
         else
         {
-            res.redirect("./usuarios/login");
+            res.redirect("cadastrar");
         }
     });
 }
@@ -91,25 +94,27 @@ exports.login = (req, res, next) => {
             email: email,
         }
     }).then(usuario => {
+        console.log(usuario);
         if(usuario != undefined)
         {
             const confirmarSenha = bycrypt.compareSync(senha, usuario.senha);
             if(confirmarSenha)
             {
+                /*
                 req.session.login = {
                     nome: usuario.nome
-                }
+                }*/
 
                 res.redirect('/');
             }
             else
             {
-                res.render('login', {msg: 'Usuário ou Senha Invalidos'});
+                res.render('./usuario/login', {msg: 'Senha Invalidos'});
             }
         }
         else
         {
-            res.render('login', {msg: 'Usuário ou Senha Invalidos'});
+            res.render('./usuario/login', {msg: 'Usuário Invalidos'});
         }
     });
 }

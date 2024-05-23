@@ -7,7 +7,7 @@ const UsuarioController = require('../controllers/UsuarioController');
 router.get('/login', UsuarioController.renderLogin);
 router.post('/login', UsuarioController.login);
 router.get('/cadastrar', UsuarioController.renderNovo);
-router.post('/', UsuarioController.create);
+router.post('/cadastrar', UsuarioController.create);
 router.get('/:id', UsuarioController.renderEditar);
 router.post('/salvar', UsuarioController.update);
 router.get('/delete/:id', UsuarioController.delete);
