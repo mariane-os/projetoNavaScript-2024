@@ -35,7 +35,6 @@ exports.create = (req, res, next) => {
                 console.log("Foi criado");
                 res.redirect("login");
             });
-            res.redirect("login");
         }
         else
         {
@@ -45,8 +44,7 @@ exports.create = (req, res, next) => {
 }
 
 exports.renderEditar = (req, res, next) => {
-    const id = req.params.id;
-    Usuario.findByPk(id).then(usuario => {
+    Usuario.findByPk(req.session.login.id).then(usuario => {
         res.render("usuario/editar", {usuario:usuario});
     });
 }
@@ -70,15 +68,20 @@ exports.update = (req, res, next) => {
 }
 
 exports.delete = (req, res, next) => {
-    const id = req.params.id;
-
-    Usuario.destroy({
-        where: {
-            id: id
+    Usuario.findByPk(req.session.login.id).then(usuario => {
+        if(usuario.cpf == req.body.cpf){
+            Usuario.destroy({
+                where: {
+                    id: req.session.login.id
+                }
+            }).then(() => {
+                res.redirect('login');
+            });
+        }else{
+            res.render('./usuario/delete', {msg: 'CPF ERRADO'})
         }
-    }).then(() => {
-        res.redirect('/usuarios');
     });
+
 }
 
 exports.renderLogin = (req, res, next) => {
@@ -100,21 +103,28 @@ exports.login = (req, res, next) => {
             const confirmarSenha = bycrypt.compareSync(senha, usuario.senha);
             if(confirmarSenha)
             {
-                /*
-                req.session.login = {
-                    nome: usuario.nome
-                }*/
+                
+                req.session.login = { id: usuario.id}
 
-                res.redirect('/');
+                res.redirect('/usuarios/');
             }
             else
             {
-                res.render('./usuario/login', {msg: 'Senha Invalidos'});
+                res.render('./usuario/login', {msg: 'Usuário ou Senha Invalidos'});
             }
         }
         else
         {
-            res.render('./usuario/login', {msg: 'Usuário Invalidos'});
+            res.render('./usuario/login', {msg: 'Usuário ou Senha Invalidos'});
         }
     });
+}
+
+exports.renderDashboard = (req, res, next) => {
+    console.log(req.session.login.id);
+    res.render("./usuario/index");
+}
+
+exports.renderDelete = (req, res, next) => {
+    res.render('./usuario/delete', {msg: ''})
 }
