@@ -12,7 +12,7 @@ exports.renderLogin = (req, res, next) => {
 }
 
 exports.renderNovo = (req, res, next) => {
-    res.render("./funcionario/novo");
+    res.render("./funcionario/cadastrar");
 }
 
 exports.login = (req, res, next) => {
@@ -33,7 +33,7 @@ exports.login = (req, res, next) => {
                     numeroPessoal: funcionario.numeroPessoal
                 }
 
-                res.redirect("./funcionario/dashboard");
+                res.redirect("dashboard");
             }
             else
             {
@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
 }
 
 exports.novo = (req, res, next) => {
-    const nome = req.body.nome;
+    const nome = req.body.nome
     const senha = req.body.senha;
 
     Funcionario.findOne({
@@ -63,20 +63,38 @@ exports.novo = (req, res, next) => {
             }).then(ultimoFuncionario => {
                 const salt = Bcrypt.genSaltSync();
                 const senhaCriptografada = Bcrypt.hashSync(senha, salt);
-                const numeroPessoal = ultimoFuncionario.numeroPessoal + 1
+
+                let numeroP = 30100000;
+                if(ultimoFuncionario != undefined){
+                    numeroP = ultimoFuncionario.numeroPessoal + 1;
+                }
 
                 Funcionario.create({
-                    numeroPessoal: numeroPessoal,
+                    numeroPessoal: numeroP,
                     nome: nome,
                     senha: senhaCriptografada
                 }).then(() => {
-                    res.redirect('./funcionario/NovoNumero', {np: numeroPessoal});
+                    res.render('./funcionario/NovoNumero', {np: numeroP});
                 });
             });
         }
         else
         {
-            res.redirect('./funcionario/dashboard');
+            res.redirect('dashboard');
         }
     });
+}
+
+exports.renderEditar = (req, res, next) => {
+    Funcionario.findOne({
+        where: {
+            numeroPessoal: req.session.login.numeroPessoal
+        }
+    }).then(funcionario => {
+        if(funcionario != undefined){
+            res.render('./funcionario/editar', {funcionario: funcionario});
+        }else{
+            res.redirect('dashboard')
+        }
+    })
 }
