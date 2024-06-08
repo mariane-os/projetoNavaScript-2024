@@ -2,4 +2,22 @@
 <h1>Hello World</h1>
 <a href="/usuarios/delete" class="btn btn-primary">Deletar Conta</a>
 <a href="/usuarios/editar" class="btn btn-primary">Editar Conta</a>
+<a href="/usuarios/movimentacoes" class="btn btn-primary">Ver Movimentações</a>
+<table class="table table-bordered">
+    Saldo conquistado até o momento: <%= usuario.saldo%> R$
+    <thread>
+        <th class="col-10">Tipos</th>
+        <th class="col-2">Quantidade Reciclada</th>
+    </thread>
+    <tbody>
+        <% lixos.forEach(lixo => { %>
+            <tr>
+                <td><%= lixo.tipo %> </td>
+                <td>
+                    <%= lixo.peso_total %> Kg's
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
 <%- include('../partials/footer.ejs') %>

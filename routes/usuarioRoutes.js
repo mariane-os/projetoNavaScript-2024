@@ -2,6 +2,7 @@ const Express = require('express');
 const router = Express.Router();
 
 const UsuarioController = require('../controllers/UsuarioController');
+const LixoController = require('../controllers/LixoController');
 const checkLogin = require('../middleware/checkUser');
 
 router.get('/login', UsuarioController.renderLogin);
@@ -13,5 +14,6 @@ router.post('/salvar', checkLogin, UsuarioController.update);
 router.get('/delete', checkLogin, UsuarioController.renderDelete);
 router.post('/delete', checkLogin, UsuarioController.delete)
 router.get('/', checkLogin, UsuarioController.renderDashboard);
+router.get('/movimentacoes', checkLogin, LixoController.renderMovimentacao);
 
 module.exports = router;

@@ -2,6 +2,8 @@ const Express = require("express");
 const Usuario = require("../models/usuario");
 const bycrypt = require("bcryptjs");
 const { Op, where } = require("sequelize");
+const sequelize = require("sequelize");
+const Lixo = require("../models/Lixos");
 
 
 exports.renderNovo = (req, res, next) => {
@@ -97,7 +99,6 @@ exports.login = (req, res, next) => {
             email: email,
         }
     }).then(usuario => {
-        console.log(usuario);
         if(usuario != undefined)
         {
             const confirmarSenha = bycrypt.compareSync(senha, usuario.senha);
@@ -121,8 +122,21 @@ exports.login = (req, res, next) => {
 }
 
 exports.renderDashboard = (req, res, next) => {
-    console.log(req.session.login.id);
-    res.render("./usuario/index");
+    Usuario.findByPk(req.session.login.id).then(user => {
+        Lixo.findAll({
+            attributes: [
+                'tipo',
+                [sequelize.fn('sum', sequelize.col('peso')), 'peso_total']
+            ],
+            where: {
+                usuarioId: req.session.login.id
+            },
+            group: 'tipo',
+            raw: true
+        }).then( lixos => {
+            console.log(lixos);
+            res.render("./usuario/index", {usuario: user, lixos: lixos});
+        })})
 }
 
 exports.renderDelete = (req, res, next) => {
