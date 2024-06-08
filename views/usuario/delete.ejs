@@ -1,0 +1,41 @@
+<%- include('../partials/headLogin.ejs') %>
+<div style="width: 100%; display: flex; justify-content: center; padding-top: 10%">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Confirme a sua Ação</h5>
+            <p class="card-text">Digite o seu cpf para deletar a conta</p>
+            <form method="post" action="/usuarios/delete">
+                <div class="form-floating mb-3">
+                    <input
+                        type="text"
+                        name="cpf"
+                        id="cpf"
+                        class="form-control"
+                        placeholder="Digite o CPF da conta"
+                        >
+                <label for="nome">Digite o CPF da conta</label>
+                </div>
+
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col"> 
+                            <button type="submit" class="btn btn-danger">deletar</button>    
+                        </div>
+                    
+                        <div class="col" > 
+                            <a href="/usuarios/" class="btn btn-primary">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+                <% if(msg != '') { %>
+                    <div class="alert alert-danger mt-3">
+                        <%= msg %>
+                    </div>
+                <% }%>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer.ejs') %>

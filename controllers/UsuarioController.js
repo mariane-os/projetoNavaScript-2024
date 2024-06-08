@@ -1,7 +1,9 @@
 const Express = require("express");
 const Usuario = require("../models/usuario");
 const bycrypt = require("bcryptjs");
-const { op, where } = require("sequelize");
+const { Op, where } = require("sequelize");
+const sequelize = require("sequelize");
+const Lixo = require("../models/Lixos");
 
 
 exports.renderNovo = (req, res, next) => {
@@ -13,17 +15,18 @@ exports.create = (req, res, next) => {
     const nome = req.body.nome;
     const email = req.body.email;
     const senha = req.body.senha;
-
+    console.log("Entrou no create");
     Usuario.findOne({
         where: {
-            [op.or]: [{email: email}, {cpf: cpf}]
+            [Op.or]: [{email: email}, {cpf: cpf}],
         }
     }).then(usuario => {
+        console.log("Entrou na arrow")
         if(usuario == undefined)
         {
             const salt = bycrypt.genSaltSync();
             const senhaCriptografada = bycrypt.hashSync(senha, salt);
-
+            console.log("Entrou no undefined")
             Usuario.create({
                 cpf: cpf,
                 nome: nome,
@@ -31,19 +34,19 @@ exports.create = (req, res, next) => {
                 senha: senhaCriptografada,
                 saldo: 0.00
             }).then(() => {
-                res.redirect("./usuarios/login");
+                console.log("Foi criado");
+                res.redirect("login");
             });
         }
         else
         {
-            res.redirect("./usuarios/cadastrar");
+            res.redirect("cadastrar");
         }
     });
 }
 
 exports.renderEditar = (req, res, next) => {
-    const id = req.params.id;
-    Usuario.findByPk(id).then(usuario => {
+    Usuario.findByPk(req.session.login.id).then(usuario => {
         res.render("usuario/editar", {usuario:usuario});
     });
 }
@@ -67,15 +70,20 @@ exports.update = (req, res, next) => {
 }
 
 exports.delete = (req, res, next) => {
-    const id = req.params.id;
-
-    Usuario.destroy({
-        where: {
-            id: id
+    Usuario.findByPk(req.session.login.id).then(usuario => {
+        if(usuario.cpf == req.body.cpf){
+            Usuario.destroy({
+                where: {
+                    id: req.session.login.id
+                }
+            }).then(() => {
+                res.redirect('login');
+            });
+        }else{
+            res.render('./usuario/delete', {msg: 'CPF ERRADO'})
         }
-    }).then(() => {
-        res.redirect('/usuarios');
     });
+
 }
 
 exports.renderLogin = (req, res, next) => {
@@ -96,20 +104,41 @@ exports.login = (req, res, next) => {
             const confirmarSenha = bycrypt.compareSync(senha, usuario.senha);
             if(confirmarSenha)
             {
-                req.session.login = {
-                    nome: usuario.nome
-                }
+                
+                req.session.login = { id: usuario.id}
 
-                res.redirect('/');
+                res.redirect('/usuarios/');
             }
             else
             {
-                res.render('login', {msg: 'Usuário ou Senha Invalidos'});
+                res.render('./usuario/login', {msg: 'Usuário ou Senha Invalidos'});
             }
         }
         else
         {
-            res.render('login', {msg: 'Usuário ou Senha Invalidos'});
+            res.render('./usuario/login', {msg: 'Usuário ou Senha Invalidos'});
         }
     });
+}
+
+exports.renderDashboard = (req, res, next) => {
+    Usuario.findByPk(req.session.login.id).then(user => {
+        Lixo.findAll({
+            attributes: [
+                'tipo',
+                [sequelize.fn('sum', sequelize.col('peso')), 'peso_total']
+            ],
+            where: {
+                usuarioId: req.session.login.id
+            },
+            group: 'tipo',
+            raw: true
+        }).then( lixos => {
+            console.log(lixos);
+            res.render("./usuario/index", {usuario: user, lixos: lixos});
+        })})
+}
+
+exports.renderDelete = (req, res, next) => {
+    res.render('./usuario/delete', {msg: ''})
 }
