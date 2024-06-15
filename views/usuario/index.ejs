@@ -1,22 +1,85 @@
 <%- include('../partials/head.ejs') %>
 <%- include('../partials/menuUser.ejs') %>
-<h1>Hello World</h1>
-<a href="/usuarios/delete" class="btn btn-primary">Deletar Conta</a>
-<table class="table table-bordered">
-    Saldo conquistado até o momento: <%= usuario.saldo%> R$
-    <thread>
-        <th class="col-10">Tipos</th>
-        <th class="col-2">Quantidade Reciclada</th>
-    </thread>
-    <tbody>
-        <% lixos.forEach(lixo => { %>
-            <tr>
-                <td><%= lixo.tipo %> </td>
-                <td>
-                    <%= lixo.peso_total %> Kg's
-                </td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row text-center">
+        <h1>Seja bem vindo <span style="color: #00bd26;"><%=usuario.nome%></span></h1>
+    </div>
+    <br>
+    <div class="row text-center">
+        <h2>Quantidade de material reciclado até o momento</h2>
+    </div>
+    <div class="row">
+        <!--Amarelo/azul/vermelho/verde-->
+        <div class="col-3" align="center">
+            <div class="card text-center text-white" style="width: 12rem;background-color: green;">
+                <div class="card-body align-itens-center">
+                    <div class="card-title" ><h2>Metal</h2></div>
+                    <div class="card-text">
+                        <h2>
+                        <%if (lixos.length >= 1) { %>
+                            <%= lixos[0].peso_total %>
+                        <% }else { %>
+                            0
+                        <% } %> Kg's
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" align="center">
+            <div class="card text-center text-white" style="width: 12rem;background-color: green;">
+                <div class="card-body align-itens-center">
+                    <div class="card-title" ><h2>Papel</h2></div>
+                    <div class="card-text">
+                        <h2>
+
+                        <%if (lixos.length >= 2) { %>
+                            <%= lixos[1].peso_total %>
+                        <% }else { %>
+                            0
+                        <% } %> Kg's
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" align="center">
+            <div class="card text-center text-white" style="width: 12rem;background-color: green;">
+                <div class="card-body align-itens-center">
+                    <div class="card-title" ><h2>Plástico</h2></div>
+                    <div class="card-text">
+                        <h2>
+
+                        <%if (lixos.length >= 3) { %>
+                            <%= lixos[2].peso_total %>
+                        <% }else { %>
+                            0
+                        <% } %> Kg's
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" align="center">
+            <div class="card text-center text-white" style="width: 12rem;background-color: green;">
+                <div class="card-body align-itens-center">
+                    <div class="card-title" ><h2>Vidro</h2></div>
+                    <div class="card-text">
+                        <h2>
+
+                        <%if (lixos.length >= 4) { %>
+                            <%= lixos[3].peso_total %>
+                        <% }else { %>
+                            0
+                        <% } %> Kg's
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center mt-5">
+        <h2>Voce poupou <span style="color: #00bd26;">R$<%= usuario.saldo%></span> de seu imposto de renda</h2>
+    </div>
+</div>
 <%- include('../partials/footer.ejs') %>

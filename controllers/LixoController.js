@@ -1,7 +1,8 @@
 const Express = require('express');
 const Lixo = require("../models/Lixos");
 const Usuario = require('../models/usuario');
-const {calcularValor} = require('../utils/conversao');
+const {calcularValor, DataParaBanco} = require('../utils/conversao');
+const DATA = require('../utils/conversao');
 
 exports.renderAdicionar = (req, res, next) => {
     res.render('./lixo/adicionarLixo', {msg: ''});
@@ -48,6 +49,6 @@ exports.renderMovimentacao = (req, res, next) => {
             usuarioId: req.session.login.id
         }
     }).then( lixos => {
-        res.render('./lixo/movimentacao', {lixos: lixos});
+        res.render('./lixo/movimentacao', {lixos: lixos, DataParaBanco: DATA});
     })
 }

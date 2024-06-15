@@ -132,7 +132,10 @@ exports.renderDashboard = (req, res, next) => {
                 usuarioId: req.session.login.id
             },
             group: 'tipo',
-            raw: true
+            raw: true,
+            order: [
+                ['tipo', 'ASC']
+            ]
         }).then( lixos => {
             console.log(lixos);
             res.render("./usuario/index", {usuario: user, lixos: lixos});
