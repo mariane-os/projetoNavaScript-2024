@@ -1,3 +1,35 @@
-<h1>Editar Nome</h1>
-<%= funcionario.numeroPessoal%>
-<%= funcionario.nome%>
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/menuFuncionario.ejs') %>
+<div class="container">
+    <div class="row text-center mt-4">
+        <h1>Editar Nome</h1>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                Editar Nome 
+            </div>
+            <div class="card-body">
+                <form method="post" action="/funcionarios/editar">
+                    <input name="id" type="hidden" value="<%= funcionario.id %>">
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            name="nome"
+                            id="nome"
+                            class="form-control"
+                            placeholder="Nome do Usuário"
+                            value="<%= funcionario.nome %>"
+                            required>
+                        <label for="nome">Nome do Usuário</label>
+                    </div>
+                    
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="dashboard" class="btn btn-warning">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

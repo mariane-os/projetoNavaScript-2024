@@ -1,40 +1,41 @@
 <%- include('../partials/head.ejs') %>
-<%- include('../partials/menu.ejs') %>
+<%- include('../partials/menuFuncionario.ejs') %>
 
 <div class="container">
-    <br\>
-    <div class="card">
-        <div class="card-header">
-            Novo Funcionario
-        </div>
-        <div class="card-body">
-            <form method="post" action="/funcionarios/novo">
-                <div class="form-floating mb-3">
-                    <input
-                        type="text"
-                        name="nome"
-                        id="nome"
-                        class="form-control"
-                        placeholder="Nome"
-                        required>
-                    <label for="nome">Nome</label>                   
-                </div>
+    <div class="row mt-5">
+        <div class="card">
+            <div class="card-header">
+                Novo Funcionario
+            </div>
+            <div class="card-body">
+                <form method="post" action="/funcionarios/novo">
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            name="nome"
+                            id="nome"
+                            class="form-control"
+                            placeholder="Nome"
+                            required>
+                        <label for="nome">Nome</label>                   
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input
-                        type="password"
-                        name="senha"
-                        id="senha"
-                        class="form-control"
-                        placeholder="Senha"
-                        required>
-                    <label for="nome">Senha</label>
-                </div>
-                <div class="form-floating">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="/" class="btn btn-warning">Cancelar</a>
-                </div>
-            </form>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="password"
+                            name="senha"
+                            id="senha"
+                            class="form-control"
+                            placeholder="Senha"
+                            required>
+                        <label for="nome">Senha</label>
+                    </div>
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="dashboard" class="btn btn-warning">Cancelar</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

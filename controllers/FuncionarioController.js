@@ -1,10 +1,17 @@
 const Express = require('express');
 const Funcionario = require("../models/funcionarios");
 const Bcrypt = require("bcryptjs");
+const { where } = require('sequelize');
 
 
 exports.renderDashboard = (req, res, next) => {
-    res.render("./funcionario/dashboard");
+    Funcionario.findOne({
+        where: {
+            numeroPessoal: req.session.login.numeroPessoal
+        }
+    }).then(funcionario => {
+        res.render("./funcionario/dashboard", {funcionario: funcionario});
+    });
 }
 
 exports.renderLogin = (req, res, next) => {
@@ -97,4 +104,43 @@ exports.renderEditar = (req, res, next) => {
             res.redirect('dashboard')
         }
     })
+}
+
+exports.editar = (req, res, next) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    
+    Funcionario.update({
+        nome: nome,
+    },
+    {
+        where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect("/funcionarios/dashboard");
+    });
+}
+
+exports.renderTesteNovo = (req, res, next) =>{
+    res.render('./funcionario/NovoNumero', {np: 'teste'})
+} 
+
+exports.renderEsqueceuNP = (req, res, next) =>{
+    res.render('./funcionario/esqueceuNP', {np: ""});
+}
+
+exports.EsqueceuNP = (req, res, next) => {
+    const nome = req.body.nome;
+    Funcionario.findOne({
+        where: {
+            nome: nome
+        }
+    }).then(funcionario => {
+        if(funcionario != undefined){
+            res.render('./funcionario/esqueceuNP', {np: funcionario.numeroPessoal});
+        }else{
+            res.render('./funcionario/esqueceuNP', {np: "Nome não encontrado"});
+        }
+    });
 }

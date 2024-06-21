@@ -1,4 +1,25 @@
-<h1>Dashboard</h1>
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/menuFuncionario.ejs') %>
+<div class="container text-center">
+    <div class="row">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="row mt-5 pt-5">
+        <h2>
+            Bem Vindo <span style="color: #005e13;"><%= funcionario.nome %></span>
+        </h2>
+        <h4>Transformando o mundo de Reciclagem em Reciclagem</h4>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <a href="criar" class="btn text-white" style="background-color: #005e13;">
+                <h3>Cadastrar uma Reciclagem</h3>
+            </a>
+        </div>
+    </div>
+</div>
+<!--
 <a href="novo">Novo funcionario</a>
 <a href="editar">Editar Nome</a>
-<a href="criar">Cadastrar Reciclagem</a>
+<a href="criar">Cadastrar Reciclagem</a>-->
+<%- include('../partials/footer.ejs') %>

@@ -1,62 +1,63 @@
 <%- include('../partials/head.ejs') %>
-<%- include('../partials/menu.ejs') %>
+<%- include('../partials/menuFuncionario.ejs') %>
 
 <div class="container">
-    <br\>
-    <div class="card">
-        <div class="card-header">
-            Cadastrar Reciclagem
-        </div>
-        <div class="card-body">
-            <form method="post" action="/funcionarios/criar">
-                <div class="form-floating mb-3">
-                    <input
-                        type="text"
-                        name="cpf"
-                        id="cpf"
-                        class="form-control"
-                        placeholder="Cpf do cliente"
-                        required>
-                    <label for="cpf">Cpf do cliente</label>                   
-                </div>
+    <div class="row mt-5">
+        <div class="card">
+            <div class="card-header">
+                Cadastrar Reciclagem
+            </div>
+            <div class="card-body">
+                <form method="post" action="/funcionarios/criar">
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            name="cpf"
+                            id="cpf"
+                            class="form-control"
+                            placeholder="Cpf do cliente"
+                            required>
+                        <label for="cpf">Cpf do cliente</label>                   
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input
-                        type="number"
-                        name="peso"
-                        id="peso"
-                        class="form-control"
-                        placeholder="Peso em KG's"
-                        required>
-                    <label for="peso">Peso em KG's</label>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="number"
+                            name="peso"
+                            id="peso"
+                            class="form-control"
+                            placeholder="Peso em KG's"
+                            required>
+                        <label for="peso">Peso em KG's</label>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <select 
-                        class="form-control" 
-                        name="tipo"
-                        id="tipo">
-                            <option value="Metal">
-                                Metal
-                            </option>
-                            <option value="Plástico">
-                                Plástico
-                            </option>
-                            <option value="Papel">
-                                Papel
-                            </option>
-                            <option value="Vidro">
-                                Vidro
-                            </option>
-                    </select>
-                    <label for="generoId">Selecione o Tipo do Lixo</label>
-                </div>
+                    <div class="form-floating mb-3">
+                        <select 
+                            class="form-control" 
+                            name="tipo"
+                            id="tipo">
+                                <option value="Metal">
+                                    Metal
+                                </option>
+                                <option value="Plástico">
+                                    Plástico
+                                </option>
+                                <option value="Papel">
+                                    Papel
+                                </option>
+                                <option value="Vidro">
+                                    Vidro
+                                </option>
+                        </select>
+                        <label for="generoId">Selecione o Tipo do Lixo</label>
+                    </div>
 
-                <div class="form-floating">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="/" class="btn btn-warning">Cancelar</a>
-                </div>
-            </form>
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="dashboard" class="btn btn-warning">Cancelar</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
