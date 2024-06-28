@@ -14,8 +14,12 @@
                         name="numeroPessoal"
                         id="numeroPessoal"
                         class="form-control"
-                        placeholder="Digite o numero pessoal" >
-                    <label for="nome">Digite o numero pessoal</label>
+                        placeholder="Digite o numero pessoal" 
+                        pattern="[0-9]{8}"
+                        title="Seu numero pessoal de 8 digitos"
+                        maxlength="8"
+                        required>
+                    <label for="numeroPessoal">Digite o numero pessoal</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input
@@ -23,8 +27,9 @@
                         name="senha"
                         id="senha"
                         class="form-control"
-                        placeholder="Digite sua senha">
-                    <label for="email">Digite sua senha</label>
+                        placeholder="Digite sua senha"
+                        required>
+                    <label for="senha">Digite sua senha</label>
                 </div>
                 <br>
                 <% if(msg != '') { %>

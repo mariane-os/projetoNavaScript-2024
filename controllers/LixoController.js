@@ -1,8 +1,11 @@
 const Express = require('express');
 const Lixo = require("../models/Lixos");
 const Usuario = require('../models/usuario');
+const Funcionario = require('../models/funcionarios');
 const {calcularValor, DataParaBanco} = require('../utils/conversao');
 const DATA = require('../utils/conversao');
+const connection = require('../database/database');
+const { QueryTypes } = require('sequelize');
 
 exports.renderAdicionar = (req, res, next) => {
     res.render('./lixo/adicionarLixo', {msg: ''});
@@ -20,21 +23,28 @@ exports.adicionarLixo = (req, res, next) => {
         }
     }).then(user => {
         if(user != undefined){
-            Lixo.create({
-                tipo: tipo,
-                peso: peso,
-                valor: valor,
-                usuarioId: user.id
-            }).then( () => {
-                Usuario.update({
-                    saldo: user.saldo + valor
-                },
-                {
-                    where: {
-                        id: user.id
-                    }
+            Funcionario.findOne({
+                where: {
+                    numeroPessoal: req.session.login.numeroPessoal
+                }
+            }).then(funcionario => {
+                Lixo.create({
+                    tipo: tipo,
+                    peso: peso,
+                    valor: valor,
+                    usuarioId: user.id,
+                    funcionarioId: funcionario.id
                 }).then( () => {
-                    res.render('./lixo/adicionarLixo', {msg: 'Cadastrado Com Sucesso'});
+                    Usuario.update({
+                        saldo: user.saldo + valor
+                    },
+                    {
+                        where: {
+                            id: user.id
+                        }
+                    }).then( () => {
+                        res.render('./lixo/adicionarLixo', {msg: 'Cadastrado Com Sucesso'});
+                    })
                 })
             })
         }else{
@@ -44,11 +54,17 @@ exports.adicionarLixo = (req, res, next) => {
 }
 
 exports.renderMovimentacao = (req, res, next) => {
-    Lixo.findAll({
+    connection.query('SELECT lixos.tipo, lixos.peso, lixos.valor, lixos.createdAt, funcionarios.nome FROM lixos INNER JOIN funcionarios ON lixos.funcionarioId = funcionarios.id WHERE usuarioId = ' + req.session.login.id, {
+        type: QueryTypes.SELECT
+    }).then( Lixos => {
+        console.log(Lixos);
+        res.render('./lixo/movimentacao', {lixos: Lixos})
+    });
+    /*Lixo.findAll({
         where: {
             usuarioId: req.session.login.id
         }
     }).then( lixos => {
         res.render('./lixo/movimentacao', {lixos: lixos, DataParaBanco: DATA});
-    })
+    })*/
 }

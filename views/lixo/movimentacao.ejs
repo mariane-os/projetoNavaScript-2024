@@ -3,11 +3,13 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
+            <%if(lixos != 0) { %>
             <table class="table table-bordered">
                 <thread>
-                    <th class="col-6">Tipo</th>
+                    <th class="col-4">Tipo</th>
                     <th class="col-2">Quantidade Reciclada</th>
                     <th class="col-2">Valor</th>
+                    <th class="col-2">Reciclado Por</th>
                     <th class="col-2">Reciclado em</th>
                 </thread>
                 <tbody>
@@ -21,12 +23,18 @@
                                 <%= lixo.valor%> R$
                             </td>
                             <td>
+                                <%= lixo.nome%>
+                            </td>
+                            <td>
                                 <% if(lixo.createdAt.getDate() < 10){ %>0<%}%><%= lixo.createdAt.getDate()%>/<% if(lixo.createdAt.getMonth() < 10){ %>0<%} %><%= lixo.createdAt.getMonth() + 1 %>/<%= lixo.createdAt.getFullYear() %>
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
+            <%} else{ %>
+                <p>Ainda não há movimentações</p>
+            <% } %>
         </div>
     </div>
 </div>

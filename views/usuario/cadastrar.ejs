@@ -5,10 +5,10 @@
 <div class="container">
     <br>
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="background-color: rgba(86, 165, 79, 0.813); color:rgb(255, 255, 255);">
             Novo Usuário
         </div>
-        <div class="card-body">
+        <div class="card-body" style="background-color: rgba(155, 196, 151, 0.813)">
             <form method="post" action="/usuarios/cadastrar">
                 <div class="form-floating mb-3">
                     <input
@@ -37,7 +37,9 @@
                         id="cpf"
                         class="form-control"
                         placeholder="CPF"
-                        data-format="999.999.999-99"
+                        pattern="[0-9]{11}"
+                        title="Digite somente os numeros do CPF"
+                        maxlength="11"
                         required>
                     <label for="nome">CPF</label>
                 </div>
@@ -53,7 +55,7 @@
                 </div>
                 <div class="form-floating">
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="/" class="btn btn-warning">Cancelar</a>
+                    <a href="/" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

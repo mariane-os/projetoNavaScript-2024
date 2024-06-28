@@ -1,6 +1,7 @@
 
 const sequelize = require('sequelize');
 const usuario = require('./usuario');
+const funcionario = require('./funcionarios');
 const connection = require('../database/database');
 
 const Lixo = connection.define('lixos', {
@@ -20,6 +21,7 @@ const Lixo = connection.define('lixos', {
 );
 
 Lixo.belongsTo(usuario);
+Lixo.belongsTo(funcionario);
 
 //Lixo.sync({force: true});
 
