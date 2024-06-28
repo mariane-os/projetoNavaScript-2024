@@ -17,7 +17,7 @@
                     <div class="card-text">
                         <h2>
                         <%if (lixos.length >= 1) { %>
-                            <%= lixos[0].peso_total %>
+                            <%= lixos[0].peso_total.toFixed(2) %>
                         <% }else { %>
                             0
                         <% } %> Kg's
@@ -34,7 +34,7 @@
                         <h2>
 
                         <%if (lixos.length >= 2) { %>
-                            <%= lixos[1].peso_total %>
+                            <%= lixos[1].peso_total.toFixed(2) %>
                         <% }else { %>
                             0
                         <% } %> Kg's
@@ -51,7 +51,7 @@
                         <h2>
 
                         <%if (lixos.length >= 3) { %>
-                            <%= lixos[2].peso_total %>
+                            <%= lixos[2].peso_total.toFixed(2) %>
                         <% }else { %>
                             0
                         <% } %> Kg's
@@ -68,7 +68,7 @@
                         <h2>
 
                         <%if (lixos.length >= 4) { %>
-                            <%= lixos[3].peso_total %>
+                            <%= lixos[3].peso_total.toFixed(2) %>
                         <% }else { %>
                             0
                         <% } %> Kg's

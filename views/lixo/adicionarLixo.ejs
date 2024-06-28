@@ -25,11 +25,13 @@
 
                     <div class="form-floating mb-3">
                         <input
-                            type="number"
+                            type="text"
                             name="peso"
                             id="peso"
                             class="form-control"
                             placeholder="Peso em KG's"
+                            pattern="{[0-9]*[.]}"
+                            title="Utilize '.' para as casas decimais"
                             required>
                         <label for="peso">Peso em KG's</label>
                     </div>
