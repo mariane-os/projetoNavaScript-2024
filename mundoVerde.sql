@@ -19,6 +19,12 @@
 -- Table structure for table `funcionarios`
 --
 
+DROP Database IF EXISTS mundoVerde ;
+
+CREATE Database mundoVerde;
+
+USE mundoVerde;
+
 DROP TABLE IF EXISTS `funcionarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -115,3 +121,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-06-28 15:05:00
+
+GRANT ALL PRIVILEGES ON mundoVerde.* TO 'sys'@'%';
+FLUSH PRIVILEGES;

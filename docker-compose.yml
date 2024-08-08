@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mundo_verde_db
+    environment:
+      MYSQL_ROOT_PASSWORD: f1f2f3f4f5
+      MYSQL_DATABSE: mundoVerde
+      MYSQL_USER: sys
+      MYSQL_PASSWORD: mundoVerde
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 2m
+      timeout: 15s
+      retries: 20
+    volumes:
+      - ./mundoVerde.sql:/docker-entrypoint-initdb.d/mundoVerde.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - mundoVerdeNetwork
+  
+  app:
+    image: peterpedro01/mundoverde:1.0.0
+    container_name: mundo_verde_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: sys
+      DB_PASSWORD: mundoVerde
+      DB_NAME: mundoVerde
+    ports:
+      - "8080:8080"
+    networks:
+      - mundoVerdeNetwork
+
+networks:
+  mundoVerdeNetwork:
+    driver: bridge

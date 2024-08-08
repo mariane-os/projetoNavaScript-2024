@@ -1,11 +1,11 @@
 const sequelize = require('sequelize');
 
 const connection = new sequelize(
-    'mundoVerde',
-    'sys',
-    'mundoVerde@2024',
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-        host: 'localhost',
+        host: process.env.DB_HOST,
         dialect: 'mysql',
         timezone: '-03:00'
     }
