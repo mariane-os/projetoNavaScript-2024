@@ -1,4 +1,4 @@
-# Projeto MundoVere
+# Projeto MundoVerde
 
 Projeto realizado na aula de scripts, primeiro semestre de 2024, FATEC Mogi Mirim
 
