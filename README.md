@@ -1,4 +1,4 @@
-# Projeto MundoVere
+# Projeto MundoVerde
 
 ![foto do dashboard do usuário mostrando os materiais reciclados com seus respectivos pesos e valores](./images/dashboard.png)
 
