@@ -1,5 +1,7 @@
 # Projeto MundoVere
 
+![foto do dashboard do usuário mostrando os materiais reciclados com seus respectivos pesos e valores](./images/dashboard.png)
+
 Projeto realizado na aula de scripts, primeiro semestre de 2024, FATEC Mogi Mirim
 
 ## Objetivo
@@ -27,6 +29,8 @@ _Para instalar Docker no seu sistema siga o passo a passo do [site oficial](http
 - Começe a instalação do aplicativo usando o arquivo compose com o comando `docker-compose up -d` (_O -d faz com que o container rode no plano de fundo, fazendo que não seja necessário manter a janela aberta_)
 
 Com todos esses passos concluidos o aplicativo estara disponivel em `127.0.0.1:8080` ou `localhost:8080`
+
+_Obs: como teste o login e senha padrão do funcionario é 30100000/admin em um ambiente de produção isso jamais seria implementado dessa forma_
 
 ## Como parar e reiniciar após parada
 
